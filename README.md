@@ -68,3 +68,17 @@ Mit dem App Router ist Vercel der einfachste Weg:
 ```bash
 npx vercel --prod
 ```
+
+Die mitgelieferte `vercel.json` setzt `"framework": "nextjs"`. Ohne sie richtet
+sich Vercel nach dem Framework-Preset des Projekts; steht das auf „Other",
+sucht Vercel nach dem Build ein Ausgabeverzeichnis `public` und bricht ab:
+
+```
+Error: No Output Directory named "public" found after the Build completed.
+```
+
+Ein Next.js-Projekt hat kein `public`-Ausgabeverzeichnis (es hat höchstens einen
+`public/`-Ordner für statische Dateien), sondern baut nach `.next`. Die Angabe in
+`vercel.json` überschreibt das Preset und macht die Einstellung mit dem Code
+versionierbar. Alternativ im Dashboard unter *Settings → Build and Deployment*
+das Preset auf **Next.js** stellen und das Feld *Output Directory* leeren.
